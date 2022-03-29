@@ -39,15 +39,10 @@ class BaseCase:
         self.click(BL.LOGIN_SUBMIT_BTN)
 
     def logout(self):
+        self.wait().until(EC.visibility_of_element_located(BL.PAGE_CONTENT))
         self.click(BL.PROFILE_BTN)
-        self.wait().until(
-            EC.all_of(
-                EC.visibility_of_element_located(BL.LOGOUT_BTN),
-                EC.presence_of_element_located(BL.LOGOUT_BTN),
-                EC.element_to_be_clickable(BL.LOGOUT_BTN),
-            )
-        )
-        self.click(BL.LOGOUT_BTN)
+        right_menu = self.find(BL.LOGOUT_BTN)
+        self.driver.execute_script("arguments[0].click()", right_menu)
 
     def edit_profile(self):
         self.click(BL.PROFILE_PAGE_BTN)
