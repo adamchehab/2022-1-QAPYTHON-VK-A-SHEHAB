@@ -1,7 +1,6 @@
 import pytest
 from base import BaseCase
 from ui.locators import basic_locators as BL
-from selenium.webdriver.support import expected_conditions as EC
 
 
 LOGIN_DATA = ["adamchehab@gmail.com", "password123"]
@@ -11,14 +10,14 @@ class TestExample(BaseCase):
     @pytest.mark.UI
     def test_login(self):
         self.login(LOGIN_DATA)
-        assert self.driver.current_url == "https://target.my.com/dashboard"
+        assert self.find(BL.PAGE_CONTENT)
 
     @pytest.mark.UI
     def test_logout(self):
         self.login(LOGIN_DATA)
-        assert self.driver.current_url == "https://target.my.com/dashboard"
+        assert self.find(BL.PAGE_CONTENT)
         self.logout()
-        assert self.driver.current_url == "https://target.my.com/"
+        assert self.find(BL.LOGIN_BTN)
 
     @pytest.mark.UI
     def test_edit_profile_info(self):
@@ -34,14 +33,13 @@ class TestExample(BaseCase):
 
     @pytest.mark.UI
     @pytest.mark.parametrize(
-        "page_btn_locator, page_url",
+        "page_btn_locator, locator",
         [
-            pytest.param(BL.SEGMENTS_PAGE, "https://target.my.com/segments/segments_list"),
-            pytest.param(BL.STATISTICS_PAGE, "https://target.my.com/statistics/summary"),
+            pytest.param(BL.SEGMENTS_PAGE, BL.SEGMENTS_PAGE_CONTENT),
+            pytest.param(BL.STATISTICS_PAGE, BL.STATISTICS_PAGE_CONTENT),
         ],
     )
-    def test_page_switch(self, page_btn_locator, page_url):
+    def test_page_switch(self, page_btn_locator, locator):
         self.login(LOGIN_DATA)
         self.click(page_btn_locator)
-        self.wait().until(EC.url_matches(page_url))
-        assert self.driver.current_url == page_url
+        assert self.find(locator)
