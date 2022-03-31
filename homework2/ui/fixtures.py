@@ -15,7 +15,7 @@ def driver(temp_dir):
     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     browser.maximize_window()
     # TODO
-    # browser.get("https://target.my.com")
+    browser.get("https://target.my.com")
     yield browser
     browser.quit()
 
