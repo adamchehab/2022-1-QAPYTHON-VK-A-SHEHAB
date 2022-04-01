@@ -1,7 +1,3 @@
-import os
-import shutil
-import sys
-
 from ui.fixtures import *
 
 
@@ -17,7 +13,7 @@ def base_temp_dir():
 
 
 @pytest.fixture(scope='function')
-def temp_dir(base_temp_dir, request):
-    test_dir = os.path.join(base_temp_dir, request._pyfuncitem.nodeid)
+def temp_dir(request):
+    test_dir = os.path.join(request.config.base_temp_dir, request._pyfuncitem.nodeid)
     os.makedirs(test_dir)
     return test_dir

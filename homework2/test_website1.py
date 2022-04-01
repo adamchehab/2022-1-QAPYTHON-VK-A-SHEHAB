@@ -14,7 +14,7 @@ LOGIN_DATA = ["adamchehab@gmail.com", "password123"]
 
 
 @pytest.mark.UI
-@pytest.mark.skip
+# @pytest.mark.skip
 class TestLoginNegative(BaseCase):
     def test_wrong_name(self):
         self.login_page.login(
@@ -39,3 +39,10 @@ class TestTests(BaseCase):
         time.sleep(5)
         self.click((By.XPATH, "//a[contains(text(),'Windows embeddable package (64-bit)')]"))
         time.sleep(5)
+
+
+@pytest.mark.skip
+class TestFailed(BaseCase):
+    def test_fail(self):
+        self.driver.get('https://www.python.org/downloads/release/python-3104/')
+        self.base_page.find((By.XPATH, '12345'), timeout=1)
