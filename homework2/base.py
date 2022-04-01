@@ -18,9 +18,13 @@ class BaseCase:
         self.profile_page: ProfilePage = request.getfixturevalue("profile_page")
 
     @pytest.fixture(scope='function', autouse=True)
-    def save_screenshot(self, driver, request, temp_dir):
+    def ui_report(self, driver, request, temp_dir):
         failed_test_count = request.session.testsfailed
         yield
-        # if request.session.testsfailed > failed_test_count:
-        screenshot_path = os.path.join(temp_dir, 'failed.png')
-        driver.get_screenshot_as_file(screenshot_path)
+        if request.session.testsfailed > failed_test_count:
+            browser_logs = os.path.join(temp_dir, 'browser.log')
+            with open(browser_logs, 'w') as f:
+                for i in driver.get_log('browser'):
+                    f.write(f"{i['level']} - {i['source']}\n{i['message']}\n")
+            screenshot_path = os.path.join(temp_dir, 'failed.png')
+            driver.get_screenshot_as_file(screenshot_path)

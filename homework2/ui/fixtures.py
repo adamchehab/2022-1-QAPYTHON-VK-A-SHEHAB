@@ -12,13 +12,15 @@ from ui.pages.profile_page import ProfilePage
 
 
 @pytest.fixture()
-def driver(temp_dir):
+def driver(config, temp_dir):
+    url = config['url']
+
     options = Options()
     options.add_experimental_option("prefs", {"download.default_directory": temp_dir})
+
     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     browser.maximize_window()
-    # TODO
-    browser.get("https://target.my.com")
+    browser.get(url)
     yield browser
     browser.quit()
 
