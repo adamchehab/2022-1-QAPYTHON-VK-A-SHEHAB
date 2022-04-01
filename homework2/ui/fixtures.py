@@ -8,7 +8,6 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from ui.pages.base_page import BasePage
 from ui.pages.login_page import LoginPage
-from ui.pages.profile_page import ProfilePage
 
 
 @pytest.fixture()
@@ -46,8 +45,3 @@ def base_page(driver):
 @pytest.fixture()
 def login_page(driver):
     return LoginPage(driver=driver)
-
-
-@pytest.fixture()
-def profile_page(driver):
-    return ProfilePage(driver=driver)
