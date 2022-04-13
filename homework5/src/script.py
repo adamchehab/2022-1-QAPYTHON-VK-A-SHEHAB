@@ -4,8 +4,8 @@ import os
 
 
 # Settings
-CSV_RESULTS_DIR = "../results/csv"
-JSON_RESULTS_DIR = "../results/json"
+CSV_RESULTS_DIR = "results/csv"
+JSON_RESULTS_DIR = "results/json"
 
 
 # Write CSV to JSON file
@@ -18,6 +18,11 @@ def csv_to_json(csvFilePath, jsonFilePath):
     with open(jsonFilePath, "w") as jsonf:
         jsonString = json.dumps(data, indent=4)
         jsonf.write(jsonString)
+
+
+# Create JSON results folder if it doesnt exist
+if not os.path.exists(JSON_RESULTS_DIR):
+    os.makedirs(JSON_RESULTS_DIR)
 
 
 # List of CSV result files

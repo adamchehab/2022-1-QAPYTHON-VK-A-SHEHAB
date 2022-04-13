@@ -1,7 +1,7 @@
 #!/bin/bash
 
-LOG_FILE="../data/access.log"
-RESULTS_DIR='../results/csv'
+LOG_FILE="$1"
+RESULTS_DIR='results/csv'
 
 mkdir -p $RESULTS_DIR
 
