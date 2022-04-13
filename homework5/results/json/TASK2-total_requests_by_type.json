@@ -1,0 +1,18 @@
+[
+    {
+        "TYPE": "GET",
+        "COUNT": "122095"
+    },
+    {
+        "TYPE": "POST",
+        "COUNT": "102503"
+    },
+    {
+        "TYPE": "HEAD",
+        "COUNT": "528"
+    },
+    {
+        "TYPE": "PUT",
+        "COUNT": "6"
+    }
+]

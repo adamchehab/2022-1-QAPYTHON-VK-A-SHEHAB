@@ -1,0 +1,42 @@
+[
+    {
+        "URL": "/administrator/index.php",
+        "COUNT": "103932"
+    },
+    {
+        "URL": "/apache-log/access.log",
+        "COUNT": "26336"
+    },
+    {
+        "URL": "/",
+        "COUNT": "6940"
+    },
+    {
+        "URL": "/templates/_system/css/general.css",
+        "COUNT": "4980"
+    },
+    {
+        "URL": "/robots.txt",
+        "COUNT": "3199"
+    },
+    {
+        "URL": "http://almhuette-raith.at/administrator/index.php",
+        "COUNT": "2356"
+    },
+    {
+        "URL": "/favicon.ico",
+        "COUNT": "2201"
+    },
+    {
+        "URL": "/wp-login.php",
+        "COUNT": "1644"
+    },
+    {
+        "URL": "/administrator/",
+        "COUNT": "1563"
+    },
+    {
+        "URL": "/templates/jp_hotel/css/template.css",
+        "COUNT": "1287"
+    }
+]
