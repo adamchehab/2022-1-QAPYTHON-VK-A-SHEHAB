@@ -7,9 +7,11 @@ from utils import create_folder
 from utils import make_csv
 from utils import csv_to_json
 
+
 # Settings
 CSV_RESULTS_DIR = "../results/python/csv"
 JSON_RESULTS_DIR = "../results/python/json"
+
 
 # Parse arguments
 parser = argparse.ArgumentParser()
@@ -17,14 +19,13 @@ parser.add_argument("--json", action="store_true")
 parser.add_argument("--log_path", default="../access.log")
 flags = parser.parse_args()
 
+
 # Parse LOG file and add data to lists:
 ip_adresses = []
 request_types = []
 request = []
 status_code = []
-
 parse_errors_dict = {}
-
 with open(flags.log_path, "r") as file:
     for line, string in enumerate(file, start=1):
         request_type_clean = re.sub('"', "", string.split()[5])
@@ -33,12 +34,13 @@ with open(flags.log_path, "r") as file:
             request_types.append(request_type_clean)
             request.append(string.split()[6])
             status_code.append(string.split()[8])
-        # else:
-        #     parse_errors_dict[f"line {line}"] = "Bad request method."
+        else:
+            parse_errors_dict[f"line {line}"] = "Bad request method."
 
 
 # Create results/csv folder if it doesnt exist
 create_folder(CSV_RESULTS_DIR)
+
 
 # TASK_1 : Total requests:
 make_csv(
@@ -47,6 +49,7 @@ make_csv(
     headers=["TOTAL"]
 )
 
+
 # TASK_2 : Total requests by type:
 make_csv(
     filename=f"{CSV_RESULTS_DIR}/task_2",
@@ -54,12 +57,14 @@ make_csv(
     headers=["TYPE", "COUNT"]
 )
 
+
 # TASK_3 : Top 10 requests
 make_csv(
     filename=f"{CSV_RESULTS_DIR}/task_3",
     data=dict(Counter(request).most_common(10)),
     headers=["REQUEST", "COUNT"]
 )
+
 
 # TASK_4 : Top 5 biggest by size requests with 4XX error
 # Prepare dictionary for TASK_4
@@ -75,6 +80,7 @@ make_csv(
     headers=["IP", "URL", "CODE", "LEN"],
 )
 
+
 # TASK_5 : Top 5 users with 5XX error
 # Prepare list for TASK_5
 ip_adresses_5xx_list = []
@@ -87,6 +93,7 @@ make_csv(
     data=dict(Counter(ip_adresses_5xx_list).most_common(5)),
     headers=["IP", "COUNT"],
 )
+
 
 # Convert CSV to JSON - Check JSON flag and then convert JSON to DICT
 if flags.json:
