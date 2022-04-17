@@ -73,3 +73,15 @@ class ApiClient:
         )
 
         return resp
+
+    def check_segment(self):
+        headers = {
+            'X-CSRFToken': self.csrf
+        }
+
+        resp = self.session.get(
+            url=f'https://target.my.com/api/v2/remarketing/segments/{self.segment_id}.json',
+            headers=headers
+        )
+
+        return resp
