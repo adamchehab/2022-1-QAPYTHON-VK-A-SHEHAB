@@ -1,12 +1,12 @@
+from base import MyTest
+from script.script import parse_log
+
+
 from models.models import ReqByType
 from models.models import Top10Req
 from models.models import Top5Req4XX
 from models.models import Top5Req5XX
 from models.models import TotalReq
-
-
-from base import MyTest
-from script.script import parse_log
 
 
 class TestMySql(MyTest):

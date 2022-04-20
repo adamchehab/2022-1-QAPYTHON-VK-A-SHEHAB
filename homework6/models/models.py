@@ -50,16 +50,3 @@ class Top5Req5XX(BaseModel):
 
     ip = Column(String(100), nullable=False)
     ip_count = Column(Integer, nullable=False)
-
-
-# total_req
-# req_by_type
-# top10_req
-# top5_req_4xx
-# top5_req_5xx
-
-# headers=["TOTAL"]
-# headers=["TYPE", "COUNT"]
-# headers=["REQUEST", "COUNT"]
-# headers=["IP", "URL", "CODE", "LEN"]
-# headers=["IP", "COUNT"]
