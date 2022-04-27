@@ -35,6 +35,6 @@ def get_user(name):
 
 if __name__ == "__main__":
     host = os.environ.get("APP_HOST", "127.0.0.1")
-    port = os.environ.get("APP_POST", "5000")
+    port = os.environ.get("APP_POST", "8080")
 
     app.run(host, port)
