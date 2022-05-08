@@ -32,7 +32,13 @@ with open(flags.log_path, "r") as file:
         if len(request_type_clean) < 10:
             ip_adresses.append(string.split()[0])
             request_types.append(request_type_clean)
-            request.append(string.split()[6])
+
+            # Request URL - URL/URI (get path from URI + remove params (? #))
+            value = re.split(r"[?#]", string.split()[6])[0]
+            if "http://" in value:
+                val = "/" + "/".join(value.split("/")[3:])
+            request.append(val)
+
             status_code.append(string.split()[8])
         else:
             parse_errors_dict[f"line {line}"] = "Bad request method."
@@ -43,27 +49,15 @@ create_folder(CSV_RESULTS_DIR)
 
 
 # TASK_1 : Total requests:
-make_csv(
-    filename=f"{CSV_RESULTS_DIR}/task_1",
-    data={f"{len(ip_adresses)}": ""},
-    headers=["TOTAL"]
-)
+make_csv(filename=f"{CSV_RESULTS_DIR}/task_1", data={f"{len(ip_adresses)}": ""}, headers=["TOTAL"])
 
 
 # TASK_2 : Total requests by type:
-make_csv(
-    filename=f"{CSV_RESULTS_DIR}/task_2",
-    data=Counter(request_types),
-    headers=["TYPE", "COUNT"]
-)
+make_csv(filename=f"{CSV_RESULTS_DIR}/task_2", data=Counter(request_types), headers=["TYPE", "COUNT"])
 
 
 # TASK_3 : Top 10 requests
-make_csv(
-    filename=f"{CSV_RESULTS_DIR}/task_3",
-    data=dict(Counter(request).most_common(10)),
-    headers=["REQUEST", "COUNT"]
-)
+make_csv(filename=f"{CSV_RESULTS_DIR}/task_3", data=dict(Counter(request).most_common(10)), headers=["REQUEST", "COUNT"])
 
 
 # TASK_4 : Top 5 biggest by size requests with 4XX error
