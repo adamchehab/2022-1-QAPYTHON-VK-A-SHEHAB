@@ -3,7 +3,7 @@ from mysql.client import MysqlClient
 
 
 def pytest_configure(config):
-    mysql_client = MysqlClient(user='root', password='pass', db='test_sql')
+    mysql_client = MysqlClient(user='root', password='pass', db='TEST_SQL')
     mysql_client.create_db()
     mysql_client.connect()
     config.mysql_client = mysql_client
